@@ -3,6 +3,7 @@ package lokoPay_test
 import (
 	"encoding/json"
 	"fmt"
+	"loko-golang/lokoAmount"
 	"loko-golang/lokoPay"
 	"loko-golang/lokoPay/constants"
 	"loko-golang/lokoPay/payloads"
@@ -27,7 +28,9 @@ func init() {
 func TestLokoPay_PaymentProcess(t *testing.T) {
 	t.Log("payment process")
 	customer := payloads.NewCustomer("test-xx-1")
-	createPaymentParams := payloads.NewCreatePaymentRequest("10000", "USDC")
+	//充值10U
+	amount := lokoAmount.NewLokoAmountFromAmount(10, "USDC")
+	createPaymentParams := payloads.NewCreatePaymentRequest(amount.ToMinAmount().String(), amount.GetUnit())
 	createPaymentParams.SetCustomer(customer)
 	//1,creat a payment
 	fmt.Println("create payment")
@@ -111,11 +114,13 @@ func TestLokoPay_PayoutProcess(t *testing.T) {
 	t.Log("payout process")
 	//1,create a payout
 	fmt.Println("create payout")
+	//提现10U
+	amount := lokoAmount.NewLokoAmountFromAmount(10, "USDC")
 	customer := payloads.NewCustomer("test-xx-1")
 	customer.SetDestinationAddress("0xD15AA5E00971Bf47877145088d3F89b848fA24dA")
-	customer.SetDestinationCurrency("USDC")
+	customer.SetDestinationCurrency(amount.GetUnit())
 	customer.SetDestinationNetwork("Immutable zkEVM")
-	createPayoutParams := payloads.NewCreatePayoutRequest("10000", "USDC")
+	createPayoutParams := payloads.NewCreatePayoutRequest(amount.ToMinAmount().String(), amount.GetUnit())
 	createPayoutParams.SetCustomer(customer)
 	createPayoutParams.SetTransferWithNativeToken(true)
 	payout, err := lokoPayServ.Payout().Create(createPayoutParams)
@@ -257,6 +262,7 @@ func TestLokoPay_WebhookEvent(t *testing.T) {
 			fmt.Println("payout:", string(payoutBytes))
 		default:
 			t.Errorf("unknown webhook event type")
+			return
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Write([]byte(`{"success":0}`))
