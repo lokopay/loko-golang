@@ -28,6 +28,10 @@ func NewLokoPay(apiPublicKey, apiSecretKey string, liveMode bool) *LokoPay {
 	}
 }
 
+func (l *LokoPay) SetBaseUrl(baseUrl string) {
+	l.client.SetBaseUrl(baseUrl)
+}
+
 func (l *LokoPay) SetTimeout(timeout time.Duration) {
 	l.client.SetTimeout(timeout)
 }

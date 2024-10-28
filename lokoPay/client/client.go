@@ -33,6 +33,10 @@ func NewClient(publishableKey, secretKey, baseUrl string) *Client {
 	}
 }
 
+func (c *Client) SetBaseUrl(baseUrl string) {
+	c.baseUrl = baseUrl
+}
+
 func (c *Client) SetTimeout(timeout time.Duration) {
 	c.httpClient.Timeout = timeout
 }
