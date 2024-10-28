@@ -29,7 +29,7 @@ func (p *PaymentService) DecodePayment(res string) (*payloads.Payment, error) {
 
 func (p *PaymentService) Create(createPaymentParams *payloads.CreatePaymentRequest) (*payloads.Payment, error) {
 	path := "/v1/payments"
-	res, err := p.client.Request("POST", path, createPaymentParams)
+	res, err := p.client.Post(path, createPaymentParams)
 	if err != nil {
 		return nil, err
 	}
