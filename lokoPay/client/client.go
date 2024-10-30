@@ -15,6 +15,11 @@ import (
 	"time"
 )
 
+const (
+	LiveApiBaseUrl = "https://api.lokopay.io"
+	TestApiBaseUrl = "https://api-test.lokopay.io"
+)
+
 type Client struct {
 	publishableKey string
 	secretKey      string
@@ -22,7 +27,13 @@ type Client struct {
 	httpClient     *http.Client
 }
 
-func NewClient(publishableKey, secretKey, baseUrl string) *Client {
+func NewClient(publishableKey, secretKey string, liveMode bool) *Client {
+	var baseUrl string
+	if liveMode {
+		baseUrl = LiveApiBaseUrl
+	} else {
+		baseUrl = TestApiBaseUrl
+	}
 	return &Client{
 		publishableKey: publishableKey,
 		secretKey:      secretKey,

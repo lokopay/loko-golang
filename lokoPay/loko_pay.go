@@ -6,23 +6,12 @@ import (
 	"time"
 )
 
-const (
-	LiveApiBaseUrl = "https://api.lokopay.io"
-	TestApiBaseUrl = "https://api-test.lokopay.io"
-)
-
 type LokoPay struct {
 	client *client.Client
 }
 
 func NewLokoPay(apiPublicKey, apiSecretKey string, liveMode bool) *LokoPay {
-	var baseUrl string
-	if liveMode {
-		baseUrl = LiveApiBaseUrl
-	} else {
-		baseUrl = TestApiBaseUrl
-	}
-	client := client.NewClient(apiPublicKey, apiSecretKey, baseUrl)
+	client := client.NewClient(apiPublicKey, apiSecretKey, liveMode)
 	return &LokoPay{
 		client: client,
 	}

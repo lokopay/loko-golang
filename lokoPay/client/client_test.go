@@ -11,7 +11,7 @@ func init() {
 	clientServ = client.NewClient(
 		"xxx",
 		"xxx",
-		"https://api-test.lokopay.io")
+		false)
 }
 
 func TestClient_Post(t *testing.T) {
