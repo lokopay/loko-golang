@@ -29,7 +29,7 @@ func TestLokoPay_PaymentProcess(t *testing.T) {
 	t.Log("payment process")
 	customer := payloads.NewCustomer("test-xx-1")
 	//充值10U
-	amount := lokoAmount.NewLokoAmountFromAmount(10, "USDC")
+	amount := lokoAmount.NewLokoAmountFromAmount(10, constants.SymbolUSDC.String())
 	createPaymentParams := payloads.NewCreatePaymentRequest(amount.ToMinAmount().String(), amount.GetUnit())
 	createPaymentParams.SetCustomer(customer)
 	//1,creat a payment
@@ -59,7 +59,7 @@ func TestLokoPay_PaymentProcess(t *testing.T) {
 	}
 	var pickedCrypto *payloads.CryptoCurrency
 	for _, cryptoCurrency := range payment.SupportedCryptocurrencies {
-		if cryptoCurrency.Network == "Immutable zkEVM" && cryptoCurrency.PricePair == "USDC-USDC" {
+		if cryptoCurrency.Network == constants.NetworkIMX.String() && cryptoCurrency.PricePair == "USDC-USDC" {
 			pickedCrypto = cryptoCurrency
 			break
 		}
@@ -119,7 +119,7 @@ func TestLokoPay_PayoutProcess(t *testing.T) {
 	customer := payloads.NewCustomer("test-xx-1")
 	customer.SetDestinationAddress("0xD15AA5E00971Bf47877145088d3F89b848fA24dA")
 	customer.SetDestinationCurrency(amount.GetUnit())
-	customer.SetDestinationNetwork("Immutable zkEVM")
+	customer.SetDestinationNetwork(constants.NetworkIMX.String())
 	createPayoutParams := payloads.NewCreatePayoutRequest(amount.ToMinAmount().String(), amount.GetUnit())
 	createPayoutParams.SetCustomer(customer)
 	createPayoutParams.SetTransferWithNativeToken(true)
@@ -207,6 +207,7 @@ func TestLokoPay_CustomerWallet_GetSupportedCryptocurrencies(t *testing.T) {
 	customerWallet, err := lokoPayServ.CustomerWallet().Create(nil)
 	if err != nil {
 		t.Errorf("CustomerWallet() error=%v", err)
+		return
 	}
 	cryptocurrenciesBytes, _ := json.MarshalIndent(customerWallet.SupportedCryptocurrencies, "", "  ")
 	t.Logf("Customer wallet: %v", string(cryptocurrenciesBytes))
@@ -219,12 +220,13 @@ func TestLokoPay_CustomerWallet_CreateWalletAddress(t *testing.T) {
 		Customer: &payloads.Customer{
 			ID: "test-xx-1",
 		},
-		Network:  "Ethereum",
+		Network:  constants.NetworkETH.String(),
 		Currency: "USDC",
 	}
 	customerWallet, err := lokoPayServ.CustomerWallet().Create(params)
 	if err != nil {
 		t.Errorf("CustomerWallet() error=%v", err)
+		return
 	}
 	walletAddressesBytes, _ := json.MarshalIndent(customerWallet.WalletAddresses, "", "  ")
 	t.Logf("Customer wallet: %v", string(walletAddressesBytes))

@@ -31,11 +31,25 @@ var currencyMap = map[string]LokoCurrency{
 	"ARBUSDT:": {"ARBUSDT", "USDT", 6},
 }
 
-func newLokoCurrency(symbol string) (LokoCurrency, error) {
+func NewLokoCurrency(symbol string) (LokoCurrency, error) {
 	if currency, ok := currencyMap[symbol]; ok {
 		return currency, nil
 	}
 	return LokoCurrency{}, errors.New("currency not found")
+}
+
+func (c *LokoCurrency) GetSymbol() string {
+	if c == nil {
+		return ""
+	}
+	return c.Symbol
+}
+
+func (c *LokoCurrency) GetUnit() string {
+	if c == nil {
+		return ""
+	}
+	return c.Unit
 }
 
 type LokoAmount struct {
@@ -44,7 +58,7 @@ type LokoAmount struct {
 }
 
 func NewLokoAmountFromMinAmount(amount interface{}, symbol string) *LokoAmount {
-	currency, err := newLokoCurrency(symbol)
+	currency, err := NewLokoCurrency(symbol)
 	if err != nil {
 		return nil
 	}
@@ -63,7 +77,7 @@ func NewLokoAmountFromMinAmount(amount interface{}, symbol string) *LokoAmount {
 }
 
 func NewLokoAmountFromAmount(amount float64, symbol string) *LokoAmount {
-	currency, err := newLokoCurrency(symbol)
+	currency, err := NewLokoCurrency(symbol)
 	if err != nil {
 		return nil
 	}
