@@ -1,4 +1,5 @@
-module loko-golang
+module github.com/lokopay/loko-golang
+
 
 go 1.23.1
 
