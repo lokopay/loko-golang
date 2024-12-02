@@ -3,9 +3,9 @@ package service
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/lokopay/loko-golang/lokoPay/client"
+	"github.com/lokopay/loko-golang/lokoPay/payloads"
 	"io/ioutil"
-	"loko-golang/lokoPay/client"
-	"loko-golang/lokoPay/payloads"
 	"net/http"
 )
 

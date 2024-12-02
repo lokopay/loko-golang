@@ -3,8 +3,8 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"loko-golang/lokoPay/client"
-	"loko-golang/lokoPay/payloads"
+	"github.com/lokopay/loko-golang/lokoPay/client"
+	"github.com/lokopay/loko-golang/lokoPay/payloads"
 )
 
 type PayoutService struct {

@@ -2,8 +2,8 @@ package service
 
 import (
 	"encoding/json"
-	"loko-golang/lokoPay/client"
-	"loko-golang/lokoPay/payloads"
+	"github.com/lokopay/loko-golang/lokoPay/client"
+	"github.com/lokopay/loko-golang/lokoPay/payloads"
 )
 
 type CustomerWalletService struct {

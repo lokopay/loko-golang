@@ -1,7 +1,7 @@
 package client_test
 
 import (
-	"loko-golang/lokoPay/client"
+	"github.com/lokopay/loko-golang/lokoPay/client"
 	"testing"
 )
 

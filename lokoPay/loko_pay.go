@@ -1,8 +1,8 @@
 package lokoPay
 
 import (
-	"loko-golang/lokoPay/client"
-	"loko-golang/lokoPay/service"
+	"github.com/lokopay/loko-golang/lokoPay/client"
+	"github.com/lokopay/loko-golang/lokoPay/service"
 	"time"
 )
 
