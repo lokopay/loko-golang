@@ -1,17 +1,19 @@
 package payloads
 
 type CreatePaymentRequest struct {
-	Amount      string    `json:"amount,omitempty"`
-	Currency    string    `json:"currency,omitempty"`
-	Customer    *Customer `json:"customer,omitempty"`
-	Description string    `json:"description,omitempty"`
-	Order       *Order    `json:"order,omitempty"`
+	Amount       string    `json:"amount,omitempty"`
+	Currency     string    `json:"currency,omitempty"`
+	CurrencyType string    `json:"currency_type,omitempty"`
+	Customer     *Customer `json:"customer,omitempty"`
+	Description  string    `json:"description,omitempty"`
+	Order        *Order    `json:"order,omitempty"`
 }
 
-func NewCreatePaymentRequest(amount, currency string) *CreatePaymentRequest {
+func NewCreatePaymentRequest(amount, currency, currencyType string) *CreatePaymentRequest {
 	return &CreatePaymentRequest{
-		Amount:   amount,
-		Currency: currency,
+		Amount:       amount,
+		Currency:     currency,
+		CurrencyType: currencyType,
 	}
 }
 

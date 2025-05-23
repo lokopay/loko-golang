@@ -30,7 +30,8 @@ func TestLokoPay_PaymentProcess(t *testing.T) {
 	customer := payloads.NewCustomer("test-xx-1")
 	//充值10U
 	amount := lokoAmount.NewLokoAmountFromAmount(10, constants.SymbolUSDC.String())
-	createPaymentParams := payloads.NewCreatePaymentRequest(amount.ToMinAmount().String(), amount.GetUnit())
+	currencyType := "fixed"
+	createPaymentParams := payloads.NewCreatePaymentRequest(amount.ToMinAmount().String(), amount.GetUnit(), currencyType)
 	createPaymentParams.SetCustomer(customer)
 	//1,creat a payment
 	fmt.Println("create payment")
