@@ -11,6 +11,7 @@ type Payment struct {
 	CurrencyType                 string                         `json:"currency_type,omitempty"`
 	CurrencyDue                  string                         `json:"currency_due,omitempty"`
 	CurrencyDueAddress           string                         `json:"currency_due_address,omitempty" encryptAbleField:"true"`
+	CurrencyDueAddressOnly       string                         `json:"currency_due_address_only,omitempty" encryptAbleField:"true"`
 	CurrencyDueNetwork           string                         `json:"currency_due_network,omitempty"`
 	CurrencyPaid                 string                         `json:"currency_paid,omitempty"`
 	Customer                     *Customer                      `json:"customer,omitempty"`
